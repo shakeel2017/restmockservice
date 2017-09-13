@@ -1,0 +1,14 @@
+{
+	"id": "245bf899-b7ba-46cc-a3c1-2f3f989c547f",
+	"name": "John Doe",
+	"designation": "Developer",
+	"address": {
+		"street": "700 Folsom",
+		"city": "San Francisco",
+		"zip": "94105"
+	},
+	"skills": [
+		"Java",
+		"Spring"
+	]
+}
