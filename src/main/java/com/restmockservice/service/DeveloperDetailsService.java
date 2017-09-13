@@ -1,7 +1,5 @@
 package com.restmockservice.service;
 
-import java.io.IOException;
-
 import org.springframework.stereotype.Service;
 
 import com.restmockservice.domain.Developer;
@@ -12,7 +10,7 @@ public class DeveloperDetailsService {
 	
 	private DeveloperDetailsRepository developerDetailsRepository;
 	
-	public Developer getDeveloperDetails(String id) throws IOException{
+	public Developer getDeveloperDetails(String id) throws Exception{
 		return developerDetailsRepository.findOneById(id);
 	}
 
