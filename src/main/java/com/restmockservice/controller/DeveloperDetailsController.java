@@ -13,9 +13,9 @@ import com.restmockservice.service.DeveloperDetailsService;
 @RestController
 @RequestMapping(value = "/developer", produces = MediaType.APPLICATION_JSON_VALUE)
 public class DeveloperDetailsController {
-	
-	@Autowired
-	private DeveloperDetailsService developerDetailsService;
+		
+    @Autowired
+    private DeveloperDetailsService developerDetailsService;
 	
     @RequestMapping(method = RequestMethod.GET, value = "/developerid/{developerid}")
     public Developer getDeveloperInformation(@PathVariable String developerid) throws Exception {
