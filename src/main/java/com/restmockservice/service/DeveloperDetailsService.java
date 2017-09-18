@@ -1,5 +1,7 @@
 package com.restmockservice.service;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,7 +14,7 @@ public class DeveloperDetailsService {
 	@Autowired
 	private DeveloperDetailsRepository developerDetailsRepository;
 	
-	public Developer getDeveloperDetails(String id) throws Exception{
+	public Optional<Developer> getDeveloperDetails(String id) throws Exception{
 		return developerDetailsRepository.findOneById(id);
 	}
 

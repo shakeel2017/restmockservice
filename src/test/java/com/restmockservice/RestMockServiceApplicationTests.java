@@ -17,6 +17,7 @@
 //
 //import java.util.ArrayList;
 //import java.util.List;
+//import java.util.Optional;
 //
 //@RunWith(SpringRunner.class)
 //@SpringBootTest
@@ -48,15 +49,17 @@
 //	
 //	@Test
 //	public void testFetchData(){
-//		Developer developer1 = developerDetailsRepository.findOneById("123");
+//		Optional<Developer> developer1 = developerDetailsRepository.findOneById("123");
 //	    assertNotNull(developer1);
-//        assertEquals("John", developer1.getName());
-//        assertEquals("developer", developer1.getDesignation());
-//        assertEquals("valley ave", developer1.getAddress().getStreet());
-//        assertEquals("Pleasanton", developer1.getAddress().getCity());
-//        assertEquals("94566", developer1.getAddress().getZip());
-//        assertEquals("Java", developer1.getListSkills().get(0).getSkills());
-//        assertEquals("Spring", developer1.getListSkills().get(1).getSkills());
+//	    if(developer1.isPresent()){
+//	        assertEquals("John", developer1.get().getName());
+//	        assertEquals("developer", developer1.get().getDesignation());
+//	        assertEquals("valley ave", developer1.get().getAddress().getStreet());
+//	        assertEquals("Pleasanton", developer1.get().getAddress().getCity());
+//	        assertEquals("94566", developer1.get().getAddress().getZip());
+//	        assertEquals("Java", developer1.get().getListSkills().get(0).getSkills());
+//	        assertEquals("Spring", developer1.get().getListSkills().get(1).getSkills());
+//	    }
 //	}
 //		
 //	@After

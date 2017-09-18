@@ -6,9 +6,11 @@ import com.restmockservice.domain.Address;
 import com.restmockservice.domain.Developer;
 import com.restmockservice.domain.Skills;
 
+import java.util.Optional;
+
 public interface DeveloperDetailsRepository extends MongoRepository<Developer,String>{
 
-	public Developer findOneById(String id);
+	public Optional<Developer> findOneById(String id);
 	public void save(Address address);
 	public void save(Skills skills);
 	

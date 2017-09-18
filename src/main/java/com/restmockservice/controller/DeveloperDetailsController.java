@@ -1,5 +1,7 @@
 package com.restmockservice.controller;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,7 +20,7 @@ public class DeveloperDetailsController {
     private DeveloperDetailsService developerDetailsService;
 	
     @RequestMapping(method = RequestMethod.GET, value = "/developerid/{developerid}")
-    public Developer getDeveloperInformation(@PathVariable String developerid) throws Exception {
+    public Optional<Developer> getDeveloperInformation(@PathVariable String developerid) throws Exception {
     	return developerDetailsService.getDeveloperDetails(developerid);
     }
 
