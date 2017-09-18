@@ -3,9 +3,6 @@ package com.restmockservice.domain;
 import java.io.Serializable;
 import java.util.List;
 
-import javax.validation.constraints.Size;
-
-import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
@@ -17,8 +14,6 @@ public class Developer implements Serializable {
 	@Id
     private String id;
 
-	@NotEmpty
-    @Size(min = 5, max = 100)
     @Field("name")
     private String name;
 

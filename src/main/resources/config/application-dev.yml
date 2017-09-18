@@ -6,6 +6,11 @@ spring:
         active: dev
     data:
         mongodb:
-            host: localhost
-            port: 29019
-            database: devDB
+            uri: mongodb://admin:admin@ds133964.mlab.com:33964/rmsdevdb
+            port: 33964
+            host: ds133964.mlab.com
+            database: rmsdevdb
+            username: admin
+            password: admin
+        rest:
+          base-path: /developer
