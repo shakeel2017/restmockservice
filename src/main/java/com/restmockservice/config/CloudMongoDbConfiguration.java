@@ -39,6 +39,6 @@ public class CloudMongoDbConfiguration extends AbstractMongoConfiguration  {
 
     @Override
     public Mongo mongo() throws Exception {
-        return mongoDbFactory.getDb().getMongo();
+        return mongoDbFactory().getDb().getMongo();
     }
 }
