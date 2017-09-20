@@ -41,14 +41,10 @@ public class RestMockServiceApplicationTest {
 		assertNull(address1.getId());
 		developerDetailsRepository.save(address1);
 		assertNotNull(address1.getId());
-		Skills skills1 = new Skills("1", "Java");
-		Skills skills2 = new Skills("2", "Spring");
-		assertNull(skills1.getId());
-		assertNull(skills2.getId());
+		Skills skills1 = new Skills("Java");
+		Skills skills2 = new Skills("Spring");
 		developerDetailsRepository.save(skills1);
 		developerDetailsRepository.save(skills2);
-		assertNotNull(skills1.getId());
-		assertNotNull(skills2.getId());
 		List<Skills>  listSkills = new ArrayList<Skills>();
 		Developer developer1 = new Developer("123", "John", "developer", address1, listSkills);
 		assertNull(developer1.getId());
