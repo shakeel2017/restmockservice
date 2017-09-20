@@ -2,13 +2,8 @@ package com.restmockservice.config;
 
 import static java.util.Collections.singletonList;
 
-import javax.inject.Inject;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.mongo.MongoAutoConfiguration;
-import org.springframework.boot.autoconfigure.mongo.MongoProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
@@ -27,8 +22,6 @@ import com.mongodb.ServerAddress;
 @Import(value = MongoAutoConfiguration.class)
 public class MongoDbConfiguration extends AbstractMongoConfiguration  {
 
-    private final Logger logger = LoggerFactory.getLogger(MongoDbConfiguration.class);
-
     @Value("${spring.data.mongodb.host}")
     private String host;
     @Value("${spring.data.mongodb.port}")
@@ -40,11 +33,6 @@ public class MongoDbConfiguration extends AbstractMongoConfiguration  {
     @Value("${spring.data.mongodb.password}")
     private String password;
     
-    @Inject
-    private Mongo mongo;
-
-    @Inject
-    private MongoProperties mongoProperties;
     
     @Bean
     public ValidatingMongoEventListener validatingMongoEventListener() {

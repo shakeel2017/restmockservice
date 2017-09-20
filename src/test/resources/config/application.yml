@@ -1,0 +1,11 @@
+server:
+    port: 19344
+    address: localhost
+
+spring:
+    data:
+        mongodb:
+            host: localhost
+            port: 27017
+            database: testDB
+
