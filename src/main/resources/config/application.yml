@@ -7,5 +7,10 @@ spring:
     data:
         mongodb:
             database: heroku_qbd72rv8
+            uri: mongodb://admin:admin@ds141474.mlab.com:41474/heroku_qbd72rv8
+            port: 41474
+            host: ds141474.mlab.com
+            username: admin
+            password: admin
         rest:
           base-path: /developer
