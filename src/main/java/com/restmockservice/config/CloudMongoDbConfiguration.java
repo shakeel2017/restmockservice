@@ -2,9 +2,11 @@ package com.restmockservice.config;
 
 import javax.inject.Inject;
 
+import org.springframework.boot.autoconfigure.mongo.MongoAutoConfiguration;
+import org.springframework.boot.autoconfigure.mongo.MongoProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.data.mongodb.MongoDbFactory;
+import org.springframework.context.annotation.Import;
 import org.springframework.data.mongodb.config.AbstractMongoConfiguration;
 import org.springframework.data.mongodb.core.mapping.event.ValidatingMongoEventListener;
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
@@ -13,11 +15,15 @@ import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 import com.mongodb.Mongo;
 
 @Configuration
+@Import(value = MongoAutoConfiguration.class)
 @EnableMongoRepositories("com.restmockservice.repository")
 public class CloudMongoDbConfiguration extends AbstractMongoConfiguration  {
 	
 	@Inject
-	private MongoDbFactory mongoDbFactory;
+	private Mongo mongo;
+
+	@Inject
+	private MongoProperties mongoProperties;
     
     @Bean
     public ValidatingMongoEventListener validatingMongoEventListener() {
@@ -30,13 +36,12 @@ public class CloudMongoDbConfiguration extends AbstractMongoConfiguration  {
     }
     
     @Override
-    public String getDatabaseName() {
-        return mongoDbFactory.getDb().getName();
+    protected String getDatabaseName() {
+        return mongoProperties.getDatabase();
     }
 
     @Override
-    @Bean
     public Mongo mongo() throws Exception {
-        return mongoDbFactory().getDb().getMongo();
+        return mongo;
     }
 }
