@@ -38,5 +38,10 @@ public class DeveloperDetailsController {
     	}
     	return developer;
     }
+    
+    @RequestMapping(method = RequestMethod.GET, value = "/healthcheck")
+    public String getDeveloperHealthCheck() throws Exception {
+    	return "Up and Running.";  	
+    }
 
 }
