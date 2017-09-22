@@ -27,7 +27,7 @@ public class DeveloperDetailsController {
     private DeveloperDetailsService developerDetailsService;
 	
     @RequestMapping(method = RequestMethod.GET, value = "/developerid/{developerid}")
-    public Optional<Developer> getDeveloperInformation(@PathVariable String developerid) throws Exception {
+    public Optional<Developer> getDeveloperInformation(@PathVariable("developerid") String developerid) throws Exception {
     	logger.info("Displaying the Developer with id: " + developerid);
     	Optional<Developer> developer = null;
     	try {
