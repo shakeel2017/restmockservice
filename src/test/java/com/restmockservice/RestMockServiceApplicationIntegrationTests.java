@@ -2,7 +2,6 @@
 //
 //import static org.junit.Assert.assertEquals;
 //import static org.junit.Assert.assertNotNull;
-//import static org.junit.Assert.assertNull;
 //
 //import java.util.ArrayList;
 //import java.util.List;
@@ -31,20 +30,13 @@
 //	@Before
 //	public void setUp() throws Exception{
 //		Address address1= new Address("1", "valley ave", "Pleasanton", "94566");
-//		assertNull(address1.getId());
-//		developerDetailsRepository.save(address1);
 //		assertNotNull(address1.getId());
-//		Skills skills1 = new Skills("1", "Java");
-//		Skills skills2 = new Skills("2", "Spring");
-//		assertNull(skills1.getId());
-//		assertNull(skills2.getId());
-//		developerDetailsRepository.save(skills1);
-//		developerDetailsRepository.save(skills2);
-//		assertNotNull(skills1.getId());
-//		assertNotNull(skills2.getId());
+//		Skills skills1 = new Skills("Java");
+//		Skills skills2 = new Skills("Spring");
 //		List<Skills>  listSkills = new ArrayList<Skills>();
+//		listSkills.add(skills1);
+//		listSkills.add(skills2);	
 //		Developer developer1 = new Developer("123", "John", "developer", address1, listSkills);
-//		assertNull(developer1.getId());
 //		developerDetailsRepository.save(developer1);
 //		assertNotNull(developer1.getId());	
 //	}

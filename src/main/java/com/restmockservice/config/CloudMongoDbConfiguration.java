@@ -1,47 +1,27 @@
 package com.restmockservice.config;
 
-import javax.inject.Inject;
-
-import org.springframework.boot.autoconfigure.mongo.MongoAutoConfiguration;
-import org.springframework.boot.autoconfigure.mongo.MongoProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Import;
-import org.springframework.data.mongodb.config.AbstractMongoConfiguration;
-import org.springframework.data.mongodb.core.mapping.event.ValidatingMongoEventListener;
-import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
-import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
+import org.springframework.data.mongodb.MongoDbFactory;
+import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.SimpleMongoDbFactory;
 
-import com.mongodb.Mongo;
+import com.mongodb.MongoClient;
+import com.mongodb.MongoClientURI;
 
 @Configuration
-@Import(value = MongoAutoConfiguration.class)
-@EnableMongoRepositories("com.restmockservice.repository")
-public class CloudMongoDbConfiguration extends AbstractMongoConfiguration  {
+public class CloudMongoDbConfiguration {
 	
-	@Inject
-	private Mongo mongo;
-
-	@Inject
-	private MongoProperties mongoProperties;
-    
-    @Bean
-    public ValidatingMongoEventListener validatingMongoEventListener() {
-        return new ValidatingMongoEventListener(validator());
-    }
-    
-    @Bean
-    public LocalValidatorFactoryBean validator() {
-        return new LocalValidatorFactoryBean();
-    }
-    
-    @Override
-    protected String getDatabaseName() {
-        return mongoProperties.getDatabase();
+    public @Bean
+    MongoDbFactory mongoDbFactory() throws Exception {
+        MongoClientURI mongoClientURI = new MongoClientURI("mongodb://admin:admin@ds141474.mlab.com:41474/heroku_qbd72rv8");
+        MongoClient mongoClient = new MongoClient(mongoClientURI);
+        return new SimpleMongoDbFactory(mongoClient,"heroku_qbd72rv8");
     }
 
-    @Override
-    public Mongo mongo() throws Exception {
-        return mongo;
+    public @Bean
+    MongoTemplate mongoTemplate() throws Exception {
+        MongoTemplate mongoTemplate = new MongoTemplate(mongoDbFactory());
+        return mongoTemplate;
     }
 }
