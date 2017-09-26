@@ -53,8 +53,7 @@ public class RestMockServiceControllerTest {
 		Developer developer1 = new Developer("123", "John", "developer", address1, listSkills);
 		developerDetailsRepository.save(developer1);
 		assertNotNull(developer1.getId());
-		this.mockMvc = MockMvcBuilders.standaloneSetup(developerDetailsController).build();
-		
+		this.mockMvc = MockMvcBuilders.standaloneSetup(developerDetailsController).build();		
 	}
 	
 	@Test
