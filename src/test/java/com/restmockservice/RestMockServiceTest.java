@@ -23,7 +23,7 @@ import com.restmockservice.service.DeveloperDetailsService;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
-public class RestMockServiceApplicationTest {
+public class RestMockServiceTest {
 	
     @Inject
     private DeveloperDetailsService developerDetailsService;

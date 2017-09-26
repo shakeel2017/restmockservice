@@ -10,7 +10,6 @@ public class ErrorMessage {
     String message;
     
   	public ErrorMessage(int value, String string, String message2) {
-		// TODO Auto-generated constructor stub
 	}
 
 	public int getCode() {

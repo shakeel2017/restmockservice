@@ -2,6 +2,7 @@ package com.restmockcontroller;
 
 import static org.junit.Assert.assertNotNull;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,6 +14,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
+import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.util.ReflectionTestUtils;
 import org.springframework.test.web.servlet.MockMvc;
@@ -29,8 +31,7 @@ import com.restmockservice.service.DeveloperDetailsService;
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT, classes = RestMockServiceApplication.class)
 public class RestMockServiceControllerTest {
-	
-	
+		
     @Inject
 	private DeveloperDetailsRepository developerDetailsRepository;
     
@@ -58,16 +59,9 @@ public class RestMockServiceControllerTest {
 	
 	@Test
 	public void testFetchData() throws Exception{
-		mockMvc.perform(get("/developer/developerid/{id}", "123"));
-//		.andExpect(model().size(1))
-//		.andExpect(model().attributeExists("developer"))
-//		.andExpect(model().attribute("developer", 
-//				allOf(
-//					hasProperty("id", is("123")),
-//					hasProperty("name", is("John")),
-//                    hasProperty("designation", is("developer"))
-//				)
-//		));
+		mockMvc.perform(get("/developer/developerid/{id}", "123")
+		.accept(MediaType.APPLICATION_JSON))
+		.andExpect(status().isOk());
 	}
 
 }
