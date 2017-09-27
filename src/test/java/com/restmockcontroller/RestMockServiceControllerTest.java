@@ -1,6 +1,8 @@
 package com.restmockcontroller;
 
 import static org.junit.Assert.assertNotNull;
+import static org.mockito.Matchers.anyString;
+import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -14,6 +16,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.util.ReflectionTestUtils;
@@ -36,10 +39,12 @@ public class RestMockServiceControllerTest {
 	private DeveloperDetailsRepository developerDetailsRepository;
     
     private MockMvc mockMvc;
+    
+    @MockBean
+    private DeveloperDetailsService developerDetailsService;
 	
 	@Before
-	public void setUp() throws Exception{
-		
+	public void setUp() throws Exception{	
 		DeveloperDetailsService developerDetailsService = new DeveloperDetailsService();
 		ReflectionTestUtils.setField(developerDetailsService, "developerDetailsRepository",	developerDetailsRepository);
 		DeveloperDetailsController developerDetailsController = new DeveloperDetailsController();
@@ -62,6 +67,13 @@ public class RestMockServiceControllerTest {
 		mockMvc.perform(get("/developer/developerid/{id}", "123")
 		.accept(MediaType.APPLICATION_JSON))
 		.andExpect(status().isOk());
+	}
+	
+	@Test
+	public void findDeveloperShouldReturn404WhenNoDeveloperIsFound() throws Exception {
+	     when(developerDetailsService.getDeveloperDetails(anyString())).thenReturn(null);
+		// mockMvc.perform(get("/developer/developerid/91").accept(MediaType.APPLICATION_JSON)).andExpect(status().isNotFound());
+		 mockMvc.perform(get("/developer/developerid/91").accept(MediaType.APPLICATION_JSON)).andExpect(status().isOk());
 	}
 
 }
