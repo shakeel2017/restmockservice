@@ -6,7 +6,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessResourceFailureException;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -27,7 +29,7 @@ public class DeveloperDetailsController {
     private DeveloperDetailsService developerDetailsService;
 	
     @RequestMapping(method = RequestMethod.GET, value = "/developerid/{developerid}")
-    public Developer getDeveloperInformation(@PathVariable("developerid") String developerid) throws Exception {
+    public ResponseEntity<Developer> getDeveloperInformation(@PathVariable("developerid") String developerid) throws Exception {
     	logger.info("Displaying the Developer with id: {}" , developerid);
     	Developer developer = null;
     	try {
@@ -38,7 +40,9 @@ public class DeveloperDetailsController {
     		logger.warn("Could not connect to db");
             throw new DataBaseException(AppConstants.ERROR_NOT_CONNECT_TO_DB);	
     	}
-    	return developer;
+    	ResponseEntity<Developer> responseEntity = new ResponseEntity<>(developer, HttpStatus.OK);
+                
+    	return responseEntity;
     }
     @RequestMapping(method = RequestMethod.GET, value = "/developers")
     public List<Developer> getDevelopers() throws Exception {

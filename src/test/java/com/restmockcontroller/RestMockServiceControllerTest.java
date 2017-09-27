@@ -72,7 +72,7 @@ public class RestMockServiceControllerTest {
 	@Test
 	public void findDeveloperShouldReturn404WhenNoDeveloperIsFound() throws Exception {
 	     when(developerDetailsService.getDeveloperDetails(anyString())).thenReturn(null);
-		// mockMvc.perform(get("/developer/developerid/91").accept(MediaType.APPLICATION_JSON)).andExpect(status().isNotFound());
+		 //mockMvc.perform(get("/developer/developerid/91").accept(MediaType.APPLICATION_JSON)).andExpect(status().isNotFound());
 		 mockMvc.perform(get("/developer/developerid/91").accept(MediaType.APPLICATION_JSON)).andExpect(status().isOk());
 	}
 
