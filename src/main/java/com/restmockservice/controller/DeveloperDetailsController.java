@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.restmockservice.constants.AppConstants;
 import com.restmockservice.domain.Developer;
 import com.restmockservice.exception.DataBaseException;
+import com.restmockservice.exception.NoDeveloperFoundException;
 import com.restmockservice.service.DeveloperDetailsService;
 
 @RestController
@@ -40,10 +41,14 @@ public class DeveloperDetailsController {
     		logger.warn("Could not connect to db");
             throw new DataBaseException(AppConstants.ERROR_NOT_CONNECT_TO_DB);	
     	}
-    	ResponseEntity<Developer> responseEntity = new ResponseEntity<>(developer, HttpStatus.OK);
-                
+    	if (developer == null){
+             logger.warn("No Developer Details for this developerid");
+             throw new NoDeveloperFoundException(AppConstants.WARN_NO_DEVELOPER_FOUND);
+        }
+    	ResponseEntity<Developer> responseEntity = new ResponseEntity<>(developer, HttpStatus.OK);           
     	return responseEntity;
     }
+    
     @RequestMapping(method = RequestMethod.GET, value = "/developers")
     public List<Developer> getDevelopers() throws Exception {
     	logger.info("Displaying the Developers");
@@ -59,7 +64,7 @@ public class DeveloperDetailsController {
     
     @RequestMapping(method = RequestMethod.GET, value = "/healthcheck")
     public String getDeveloperHealthCheck() throws Exception {
-    	return "Up and Running.";  	
+    	return "{\"data\": \"Up and Running.\"}";  	
     }
 
 }

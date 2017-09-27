@@ -28,6 +28,7 @@ import com.restmockservice.controller.DeveloperDetailsController;
 import com.restmockservice.domain.Address;
 import com.restmockservice.domain.Developer;
 import com.restmockservice.domain.Skills;
+import com.restmockservice.exception.NoDeveloperFoundException;
 import com.restmockservice.repository.DeveloperDetailsRepository;
 import com.restmockservice.service.DeveloperDetailsService;
 
@@ -69,11 +70,16 @@ public class RestMockServiceControllerTest {
 		.andExpect(status().isOk());
 	}
 	
+	@SuppressWarnings("unchecked")
 	@Test
-	public void findDeveloperShouldReturn404WhenNoDeveloperIsFound() throws Exception {
-	     when(developerDetailsService.getDeveloperDetails(anyString())).thenReturn(null);
-		 //mockMvc.perform(get("/developer/developerid/91").accept(MediaType.APPLICATION_JSON)).andExpect(status().isNotFound());
-		 mockMvc.perform(get("/developer/developerid/91").accept(MediaType.APPLICATION_JSON)).andExpect(status().isOk());
+	public void findDeveloperShouldReturnNoDeveloperFoundException() throws NoDeveloperFoundException {
+		when(developerDetailsService.getDeveloperDetails(anyString())).thenThrow(NoDeveloperFoundException.class);
+		try {
+			mockMvc.perform(get("/developer/developerid/91").accept(MediaType.APPLICATION_JSON)).andExpect(status().isOk());
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 }
