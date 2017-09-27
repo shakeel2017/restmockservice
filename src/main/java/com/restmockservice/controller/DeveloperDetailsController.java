@@ -31,7 +31,9 @@ public class DeveloperDetailsController {
     	logger.info("Displaying the Developer with id: {}" , developerid);
     	Developer developer = null;
     	try {
-    		developer = developerDetailsService.getDeveloperDetails(developerid);
+    		if(developerid != null){
+    			developer = developerDetailsService.getDeveloperDetails(developerid);
+    		}
     	} catch (DataAccessResourceFailureException e) {
     		logger.warn("Could not connect to db");
             throw new DataBaseException(AppConstants.ERROR_NOT_CONNECT_TO_DB);	
