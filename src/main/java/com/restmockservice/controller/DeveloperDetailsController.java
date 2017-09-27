@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.restmockservice.constants.AppConstants;
 import com.restmockservice.domain.Developer;
 import com.restmockservice.exception.DataBaseException;
-import com.restmockservice.exception.NoDeveloperFoundException;
 import com.restmockservice.service.DeveloperDetailsService;
 
 @RestController
@@ -28,6 +27,10 @@ public class DeveloperDetailsController {
 		
     @Autowired
     private DeveloperDetailsService developerDetailsService;
+    
+    /*
+     * Rest end point for getting specific developer.
+     */
 	
     @RequestMapping(method = RequestMethod.GET, value = "/developerid/{developerid}")
     public ResponseEntity<Developer> getDeveloperInformation(@PathVariable("developerid") String developerid) throws Exception {
@@ -44,11 +47,15 @@ public class DeveloperDetailsController {
     	}
     	if (developer == null){
              logger.warn("No Developer Details for this developerid");
-             throw new NoDeveloperFoundException(AppConstants.WARN_NO_DEVELOPER_FOUND);
+             return new ResponseEntity<Developer>(HttpStatus.NOT_FOUND);
         }
     	responseEntity = new ResponseEntity<>(developer, HttpStatus.OK);           
     	return responseEntity;
     }
+    
+    /*
+     * Rest end point for getting all the developers
+     */
     
     @RequestMapping(method = RequestMethod.GET, value = "/developers")
     public List<Developer> getDevelopers() throws Exception {
@@ -62,6 +69,10 @@ public class DeveloperDetailsController {
     	}
     	return developers;
     }
+    
+    /*
+     * Healthcheck simple end point.
+     */
     
     @RequestMapping(method = RequestMethod.GET, value = "/healthcheck")
     public String getDeveloperHealthCheck() throws Exception {

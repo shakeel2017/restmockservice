@@ -75,7 +75,7 @@ public class RestMockServiceControllerTest {
 	public void findDeveloperShouldReturnNoDeveloperFoundException() throws NoDeveloperFoundException {
 		when(developerDetailsService.getDeveloperDetails(anyString())).thenThrow(NoDeveloperFoundException.class);
 		try {
-			mockMvc.perform(get("/developer/developerid/91").accept(MediaType.APPLICATION_JSON)).andExpect(status().isOk());
+			mockMvc.perform(get("/developer/developerid/91").accept(MediaType.APPLICATION_JSON)).andExpect(status().isNotFound());
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
