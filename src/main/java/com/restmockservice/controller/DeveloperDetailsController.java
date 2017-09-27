@@ -33,6 +33,7 @@ public class DeveloperDetailsController {
     public ResponseEntity<Developer> getDeveloperInformation(@PathVariable("developerid") String developerid) throws Exception {
     	logger.info("Displaying the Developer with id: {}" , developerid);
     	Developer developer = null;
+    	ResponseEntity<Developer> responseEntity= null;
     	try {
     		if(developerid != null){
     			developer = developerDetailsService.getDeveloperDetails(developerid);
@@ -45,7 +46,7 @@ public class DeveloperDetailsController {
              logger.warn("No Developer Details for this developerid");
              throw new NoDeveloperFoundException(AppConstants.WARN_NO_DEVELOPER_FOUND);
         }
-    	ResponseEntity<Developer> responseEntity = new ResponseEntity<>(developer, HttpStatus.OK);           
+    	responseEntity = new ResponseEntity<>(developer, HttpStatus.OK);           
     	return responseEntity;
     }
     
